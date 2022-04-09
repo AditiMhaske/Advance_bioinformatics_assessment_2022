@@ -1,0 +1,46 @@
+#Task 3.1
+sum(5:55)
+
+#Task 3.2
+sumfun <- function(n) {sum(5:n)}
+sumfun(10)
+sumfun(20)
+sumfun(100)
+
+#Task 3.3
+
+#Task 3.4
+#input the dataset mtcars, columns "mpg" and "gear"
+input <- mtcars[,c('mpg','gear')]
+#view the columns
+print(head(input))
+#load the library ggplot2
+library(ggplot2)
+#command to create a as variable, load the dataset mtcars, plotting the mpg (miles per gallon)as a function of gear; on x axis=gear and y axis = mpg, as a asthetic fill-color the boxes representing the number of gears.
+#execute the following command
+a <- ggplot(data = mtcars, aes(as.factor(gear),y = mpg))+geom_boxplot(aes(fill=as.factor(gear)))
+#giving the plot a title
+a+ggtitle("box plot of mpg against no. of gears")
+
+#Task 3.5
+# Assign variabs a and b to distance and speed respectively from the datset cars
+a <- cars$dist
+b <- cars$speed
+
+#Assign variable c to the lm function to generate the linear model between speed and distance
+c <- lm(formula = "a ~ b", data = cars)
+#see the statistics of the linear model
+summary(c)
+
+#Task 3.6
+#give the input as the dataset cars and columns speed and distance. Excecute the follwing command
+input <- cars[,c('speed','dist')]
+#load the ggplot2 library
+library(ggplot2)
+#Assign the variable c to generate the plot: Giving cars as the dataset, in the asethetics x axis is speed and y axis is distance. Using the linear model function to generate the best fit and the confidence intervals
+c <- ggplot(data = cars, aes(x= speed, y=dist)) + geom_point() + geom_smooth(method = "lm",formula = "y ~ x")
+#Title for the plot
+c+ggtitle("linear regression plot speed vs data")
+
+
+
