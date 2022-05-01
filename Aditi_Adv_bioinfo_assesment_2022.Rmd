@@ -1,0 +1,108 @@
+---
+title: "Advanced Bioinformatics 2022 assessment"
+author: "Aditi"
+Student Id: k21148744
+date: '2022-04-09'
+output: 
+  html_document: 
+    toc: yes
+    keep_md: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r Task 3.1}
+##The sum function is used to generate the sum of vectors
+sum(5:55)
+```
+
+```{r Task 3.2}
+###Task 3.2
+##sumfun is the function used for computing summary statistics using library(doBy)
+##calculating the sum of all the integers between 5 and n
+sumfun <- function(n) {sum(5:n)}
+##arguments for n = 10,20 and 100
+sumfun(10)
+sumfun(20)
+sumfun(100)
+```
+
+
+```{r Task 3.3}
+## The first two terms are 1 and 1. All other terms are obtained by adding the preceding two terms
+## generating the first 12 entries of this series
+Fibonacci <- function(n) 
+Fibonacci <- numeric(n) 
+Fibonacci <- numeric(12) 
+Fibonacci[1] <- 1 
+Fibonacci[2] <- 1 
+for(i in 3:12) Fibonacci[i] <- Fibonacci[i-2] + Fibonacci[i-1] 
+##printing the output
+print(Fibonacci)
+```
+
+
+```{r Task 3.4}
+###Task 3.4
+#input the dataset mtcars, columns "mpg" and "gear"
+input <- mtcars[,c('mpg','gear')]
+#view the columns
+print(head(input))
+#load the library ggplot2
+library(ggplot2)
+#command to create 'a' as a variable, load the data set 'mtcars', plotting the mpg (miles per gallon) as a function of gear; on x axis=gear and y axis = mpg, as a aesthetic fill-color the boxes representing the number of gears.
+#execute the following command
+a <- ggplot(data = mtcars, aes(as.factor(gear),y = mpg))+geom_boxplot(aes(fill=as.factor(gear)))
+#giving the plot a title
+a+ggtitle("box plot of mpg against no. of gears")
+```
+```{r Task 3.5}
+###Task 3.5
+#Assign variables a and b to distance and speed respectively from the data set cars
+a <- cars$dist
+b <- cars$speed
+#Assign variable c to the lm function to generate the linear model between distance and speed
+c <- lm(formula = "a ~ b", data = cars)
+#see the statistics of the linear model
+summary(c)
+```
+
+
+```{r task 3.6}
+###Task 3.6
+#give the input as the data set "cars' and extract columns 'speed' and 'distance'. Execute the following command
+input <- cars[,c('speed','dist')]
+#load the ggplot2 library
+library(ggplot2)
+#Assign the variable c to generate the plot: Giving 'cars' as the data set, in the aesthetics x axis is speed and y axis is distance. Using the linear model function to generate the best fit and the confidence intervals
+c <- ggplot(data = cars, aes(x= speed, y=dist)) + geom_point() + geom_smooth(method = "lm",formula = "y ~ x")
+#Title for the plot
+c+ggtitle("linear regression plot speed vs data")
+
+```
+
+```{r task 3.7}
+##task 3.7
+##Variable for braking distance (distance_in_miles); ## 
+## converting the distance to miles by multiplying by ##0.000189
+distance_in_miles <- cars$dist*0.000189
+## the braking distance is proportional to the square of the speed; assigning 
+##variable 'speed_in_m'## speed in miles per hour
+speed_in_m <- cars$speed^2
+## linear regression between distance and speed
+lm <- lm(formula = "distance_in_miles ~ speed_in_m", data = cars,)
+summary(lm)
+lm$coefficients
+## calculating the reaction time in seconds therefore multiplying by 3600 (3600 secs in ## one hour)
+reaction_time <- 2.437508e-05*3600
+reaction_time
+## loading the library ggplot2 for plotting the linear ##fit
+library(ggplot2)
+## for plotting x axis is the speed in miles per hr and y ##axis is distance in miles, 
+## and the linear regression between the distance and speed and assigning the axes names
+c <- ggplot(data = cars, aes(x = speed_in_m, y = distance_in_miles)) + geom_point() + geom_smooth(method = "lm",formula = "y ~ x", color="orange")+labs(x="speed in miles per hour", y = "distance in miles")
+## assigning the plot title
+plot <- c+ggtitle("Linear regression between braking distance and speed")
+plot
+```
+
